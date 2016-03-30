@@ -151,8 +151,15 @@ class FeatureContext
     public function iPressElement($cssClass)
     {
         $this->getSession()->wait(10000);
-        $button = $this->findElement($cssClass);
-        $button->press();
+        try{
+            $button = $this->findElement($cssClass);
+            $button->press();
+        }catch (Exception $e){
+            echo $this->getSession()->getPage()->getHtml();
+
+            throw $e;
+        }
+
     }
 
     /**
